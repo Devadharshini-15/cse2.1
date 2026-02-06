@@ -1027,38 +1027,50 @@ img {
 @media (max-width: 768px) {
     .program-flip-card {
         max-width: 100%;
-        perspective: none;
-        height: auto;
-        /* Allow inner contents to define flow */
+        perspective: 1000px;
+        height: 520px;
+        /* Maintain consistent height */
     }
 
     .program-flip-inner {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        transform: none !important;
-        height: auto;
+        transform: none;
+        /* Reset global hover state */
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Flip logic tied to JS class */
+    .program-flip-card.is-flipped .program-flip-inner {
+        transform: rotateY(180deg);
+    }
+
+    /* Override any global hover effects on mobile */
+    .program-flip-card:hover .program-flip-inner {
+        transform: none;
+    }
+
+    /* Re-apply flip if class is present even on hover */
+    .program-flip-card.is-flipped:hover .program-flip-inner {
+        transform: rotateY(180deg);
     }
 
     .program-flip-front,
     .program-flip-back {
-        height: 520px;
-        /* Maintain the same height even when stacked */
-        position: relative;
-        transform: none !important;
-        backface-visibility: visible;
-        opacity: 1;
-        visibility: visible;
-        grid-area: auto;
-        box-shadow: var(--shadow-md);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .program-flip-back {
+        transform: rotateY(180deg);
     }
 
     .flip-hint {
-        display: none;
-    }
-
-    .program-flip-card:hover .program-flip-inner {
-        transform: none;
+        display: block;
+        margin-top: auto;
     }
 }
 

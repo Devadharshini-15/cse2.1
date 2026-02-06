@@ -343,4 +343,26 @@ document.addEventListener('DOMContentLoaded', () => {
         // First Load
         initCarousel();
     }
+
+    // --- Program Cards Mobile Flip Logic ---
+    const programCards = document.querySelectorAll('.program-flip-card');
+
+    programCards.forEach(card => {
+        card.addEventListener('click', function (e) {
+            // Only execute on mobile (<= 768px)
+            if (window.innerWidth <= 768) {
+                const isFlipped = this.classList.contains('is-flipped');
+
+                // Reset all other cards
+                programCards.forEach(otherCard => {
+                    if (otherCard !== this) {
+                        otherCard.classList.remove('is-flipped');
+                    }
+                });
+
+                // Toggle current card
+                this.classList.toggle('is-flipped');
+            }
+        });
+    });
 });
