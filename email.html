@@ -8,14 +8,13 @@
             margin: 0;
             padding: 0;
             background-color: #f1f5f9;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
         }
 
         .wrapper {
             width: 100%;
-            table-layout: fixed;
             background-color: #f1f5f9;
-            padding-bottom: 40px;
+            padding: 40px 0;
         }
 
         .main {
@@ -23,34 +22,16 @@
             margin: 0 auto;
             width: 100%;
             max-width: 600px;
-            border-spacing: 0;
-            color: #1e293b;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            margin-top: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .header {
             background-color: #1e40af;
-            /* primary-blue */
             padding: 40px;
             text-align: center;
-        }
-
-        .header h1 {
             color: #ffffff;
-            margin: 0;
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        .header p {
-            color: #93c5fd;
-            margin: 10px 0 0;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .content {
@@ -61,9 +42,9 @@
             font-size: 18px;
             font-weight: 700;
             color: #1e40af;
-            margin-bottom: 25px;
             border-bottom: 2px solid #f1f5f9;
             padding-bottom: 10px;
+            margin-bottom: 25px;
         }
 
         .info-table {
@@ -97,21 +78,6 @@
             border-radius: 8px;
             margin-top: 30px;
             border-left: 4px solid #f59e0b;
-            /* accent-gold */
-        }
-
-        .message-title {
-            font-weight: 700;
-            color: #64748b;
-            font-size: 12px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .message-text {
-            color: #334155;
-            font-style: italic;
-            line-height: 1.6;
         }
 
         .footer {
@@ -125,54 +91,46 @@
 
 <body>
     <div class="wrapper">
-        <table class="main">
-            <tr>
-                <td class="header">
-                    <p>New Admission Inquiry</p>
-                    <h1>Department of CSE</h1>
-                </td>
-            </tr>
-            <tr>
-                <td class="content">
-                    <div class="section-title">Student Profile</div>
-                    <table class="info-table">
-                        <tr class="info-row">
-                            <td class="label">Full Name</td>
-                            <td class="value">{{from_name}}</td>
-                        </tr>
-                        <tr class="info-row">
-                            <td class="label">Phone Number</td>
-                            <td class="value">{{phone_number}}</td>
-                        </tr>
-                        <tr class="info-row">
-                            <td class="label">Email Address</td>
-                            <td class="value">{{reply_to}}</td>
-                        </tr>
-                        <tr class="info-row">
-                            <td class="label">Program</td>
-                            <td class="value">{{selected_program}}</td>
-                        </tr>
-                        <tr class="info-row">
-                            <td class="label">Qualification</td>
-                            <td class="value">{{qualification}}</td>
-                        </tr>
-                    </table>
-
-                    <div class="message-box">
-                        <div class="message-title">Applicant Message</div>
-                        <div class="message-text">
-                            {{message}}
-                        </div>
+        <div class="main">
+            <div class="header">
+                <p style="text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">New Admission Inquiry</p>
+                <h1 style="margin: 0;">Department of CSE</h1>
+            </div>
+            <div class="content">
+                <div class="section-title">Student Profile</div>
+                <table class="info-table">
+                    <tr class="info-row">
+                        <td class="label">Full Name</td>
+                        <td class="value">{{from_name}}</td>
+                    </tr>
+                    <tr class="info-row">
+                        <td class="label">Phone Number</td>
+                        <td class="value">{{phone_number}}</td>
+                    </tr>
+                    <tr class="info-row">
+                        <td class="label">Email Address</td>
+                        <td class="value">{{reply_to}}</td>
+                    </tr>
+                    <tr class="info-row">
+                        <td class="label">Program</td>
+                        <td class="value">{{selected_program}}</td>
+                    </tr>
+                    <tr class="info-row">
+                        <td class="label">Qualification</td>
+                        <td class="value">{{qualification}}</td>
+                    </tr>
+                </table>
+                <div class="message-box">
+                    <div style="font-weight: 700; color: #64748b; font-size: 12px; margin-bottom: 10px;">MESSAGE CONTENT
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="footer">
-                    &copy; 2026 Department of CSE, SCSVMV.<br>
-                    This is an automated notification from the Prospectus Landing Page.
-                </td>
-            </tr>
-        </table>
+                    <div style="font-style: italic; line-height: 1.6;">{{message}}</div>
+                </div>
+            </div>
+            <div class="footer">
+                &copy; 2026 Department of CSE, SCSVMV.<br>
+                Automated notification from Admission Portal.
+            </div>
+        </div>
     </div>
 </body>
 
