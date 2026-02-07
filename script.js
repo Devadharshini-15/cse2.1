@@ -229,8 +229,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const templateID = 'template_hsems46';
             const publicKey = 'wPkLyIaCK35YK8UAb';
 
-            // Send using the form ID directly as per some v3 docs
-            emailjs.sendForm(serviceID, templateID, '#admissionForm', publicKey)
+            // Re-initialize just in case global init failed
+            emailjs.init(publicKey);
+
+            // Use the actual form element instead of a selector
+            emailjs.sendForm(serviceID, templateID, admissionForm)
                 .then(() => {
                     console.log('SUCCESS!');
                     submitBtnFinal.classList.remove('loading');
@@ -238,9 +241,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     formSuccess.style.display = 'block';
                     formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }, (error) => {
-                    // This alert will show the SPECIFIC error from EmailJS
-                    alert("EmailJS Failed: " + (error.text || JSON.stringify(error)));
                     console.error('EmailJS Error:', error);
+
+                    // Specific error handling for 404
+                    if (error.status === 404) {
+                        alert("EmailJS Error: 'Account not found'. \n\nPlease double-check that your PUBLIC KEY (User ID) is exactly 'wPkLyIaCK35YK8UAb'. Check for typos like I/l or O/0.");
+                    } else {
+                        alert("Form submission failed: " + (error.text || "Unknown error"));
+                    }
+
                     submitBtnFinal.classList.remove('loading');
                     submitBtnFinal.disabled = false;
                 });
