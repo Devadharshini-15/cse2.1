@@ -227,16 +227,27 @@ document.addEventListener('DOMContentLoaded', () => {
             // EmailJS Integration
             const serviceID = 'service_hqlvo6l';
             const templateID = 'template_hsems46';
+            const publicKey = 'wPkLyIaCK35YK8UAb';
 
-            emailjs.sendForm(serviceID, templateID, admissionForm)
+            // Use sendForm with the form element directly
+            // Passing publicKey as 4th param ensures it's used if global init failed
+            emailjs.sendForm(serviceID, templateID, e.target, publicKey)
                 .then(() => {
+                    console.log('SUCCESS!');
                     submitBtnFinal.classList.remove('loading');
                     admissionForm.style.display = 'none';
                     formSuccess.style.display = 'block';
                     formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }, (error) => {
-                    alert("Oops! Something went wrong. Please try again later.");
-                    console.error('EmailJS Error:', error);
+                    console.error('EmailJS Error Detailed:', error);
+                    // Provide a more helpful error message in the console
+                    if (error.status === 404) {
+                        console.error('Error 404: Service or Template ID might be incorrect.');
+                    } else if (error.status === 401) {
+                        console.error('Error 401: Public Key (User ID) might be incorrect.');
+                    }
+
+                    alert("Oops! Something went wrong. Please check your internet connection or try again later.");
                     submitBtnFinal.classList.remove('loading');
                     submitBtnFinal.disabled = false;
                 });
